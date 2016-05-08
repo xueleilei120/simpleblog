@@ -1,2 +1,0 @@
-# simpleblog2
-simple
