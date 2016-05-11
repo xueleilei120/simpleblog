@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from .forms import PostForm
 from django.core.urlresolvers import reverse
-
 # Create your views here.
 
 def post_list(request):
