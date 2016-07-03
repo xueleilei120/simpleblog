@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>liuyc blog</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+
+<body>
+	<div class="page-header">
+		<a href="{% url 'blog.views.post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+		<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+		<a  class="searchbtn"><span class="glyphicon glyphicon-search"></span></a>
+		<h1><a href="/">熊大的博客
+		<img src="{% static "images/yueyu.jpg"%}" title = 'jiayou'></a></h1>
+
+	</div>
+	 <!-- menus END -->
+    <!-- searchbox START -->
+    <div id="searchbox">
+        <form action="{% url 'blog.views.full_search' %}" method="get">
+            <div class="content">
+                <label>
+                    <input type="text" class="textfield searchtip" name="q" size="24" value="">
+                </label>
+                <input type="submit" class="button" value="搜索">
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        var searchbox = MGJS.$("searchbox");
+        var searchtxt = MGJS.getElementsByClassName("textfield", "input", searchbox)[0];
+        var searchbtn = MGJS.getElementsByClassName("button", "input", searchbox)[0];
+        var tiptext = "请输入关键字...";
+        if (searchtxt.value == "" || searchtxt.value == tiptext) {
+            searchtxt.className += " searchtip";
+            searchtxt.value = tiptext;
+        }
+        searchtxt.onfocus = function (e) {
+            if (searchtxt.value == tiptext) {
+                searchtxt.value = "";
+                searchtxt.className = searchtxt.className.replace(" searchtip", "");
+            }
+        };
+        searchtxt.onblur = function (e) {
+            if (searchtxt.value == "") {
+                searchtxt.className += " searchtip";
+                searchtxt.value = tiptext;
+            }
+        };
+        searchbtn.onclick = function (e) {
+            if (searchtxt.value == "" || searchtxt.value == tiptext) {
+                return false;
+            }
+        };
+        //]]>
+    </script>
+    <!-- searchbox END -->
+    <div class="fixed"></div>
+	<div class="content">
+		<div class="row">
+			<div class="col-md-8">
+				{% block content %}
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
